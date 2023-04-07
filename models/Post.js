@@ -7,7 +7,7 @@ Post.init(
     {
         id: {
             type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV3,
+            defaultValue: DataTypes.UUIDV4,
             allowNull: false,
             primaryKey: true
         },
@@ -30,9 +30,8 @@ Post.init(
     {
         sequelize,
         timestamps: true, // inits createdAt and updatedAt values
-        freezeTableName: true,
-        underscored: true,
-        modelName: 'Post'
+        modelName: 'post',
+        freezeTableName: true
     }
 )
 

@@ -20,7 +20,8 @@ Comment.init(
     {
         sequelize,
         timestamps: true, // inits createdAt and updatedAt values
-        modelName: 'Comment'
+        modelName: 'comment',
+        freezeTableName: true
     }
 )
 
