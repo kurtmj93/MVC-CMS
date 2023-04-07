@@ -1,0 +1,18 @@
+[
+    {
+          "title": "My first post",
+          "text": "excited to use this CMS!",
+          "user_id": 2
+    },
+    {
+        "title": "A good post for you to read",
+        "text": "because it is short.",
+        "user_id": 1
+    },
+    {
+        "title": "Okay, here's a better post",
+        "text": "Even shorter.",
+        "user_id": 1
+    }
+]
+  
