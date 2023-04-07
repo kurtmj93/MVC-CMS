@@ -16,7 +16,8 @@ const SequelizeStore = require('connect-session-sequelize')(
 const sess = {
     secret: 'Super secret secret',
     cookie: {
-      maxAge: 300000,
+      maxAge: 300000, // WHEN I am idle on the site for more than a set time
+                      // THEN I am able to view comments but I am prompted to log in again before I can add, update, or delete comments
       httpOnly: true,
       secure: false,
       sameSite: 'strict',
@@ -33,6 +34,10 @@ const sess = {
 const bars = handlebars.create({ helpers });
 app.engine('handlebars', bars.engine);
 app.set('view engine', 'handlebars');
+
+// connect and use controllers / api routes
+const routes = require('/controllers');
+app.use(routes);
 
 // express middleware for parsing JSON and urlencoded form data
 app.use(express.json());
