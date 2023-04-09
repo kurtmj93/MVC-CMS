@@ -31,22 +31,25 @@ const sess = {
   app.use(session(sess));
 
 // set handlebars as view engine
-const bars = handlebars.create({ helpers });
+const bars = handlebars.create();
 app.engine('handlebars', bars.engine);
 app.set('view engine', 'handlebars');
 
-// connect and use controllers / api routes
-const routes = require('/controllers');
+// connect and use controllers /api routes
+const routes = require('./controllers');
 app.use(routes);
+
+// connect static resources
+app.use(express.static('public'));
 
 // express middleware for parsing JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // set .env PORT, or localhost:3001
-const PORT = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 
 // turn on connection to db and server
 sequelize.sync({ force: false }).then(() => {
     app.listen(port, () => console.log('Now listening'));
-  });
+});
