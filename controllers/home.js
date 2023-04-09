@@ -1,13 +1,13 @@
 const router = require('express').Router();
 const { Post, User } = require('../models');
 
-// get all posts for main feed
+// get all posts for homepage
 router.get('/', async (req, res) => {
 
     try {
         const postData = await Post.findAll({
             limit: 10, 
-            order: [[ 'date_created', 'DESC' ]],
+            order: [[ 'createdAt', 'DESC' ]],
             include: { model: User, attributes: ['username'] }
         });
 
@@ -22,6 +22,8 @@ router.get('/', async (req, res) => {
     }
 });
 
+// TODO: get all posts for dashboard?
+
 router.get('/.*', async (req, res) => { // checks for any value
 
     if (req.session.loggedIn) { // check if loggedin
@@ -30,3 +32,5 @@ router.get('/.*', async (req, res) => { // checks for any value
       }
     res.render('signup');
 });
+
+module.exports = router;
