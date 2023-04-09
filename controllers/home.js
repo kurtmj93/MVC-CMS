@@ -24,13 +24,22 @@ router.get('/', async (req, res) => {
 
 // TODO: get all posts for dashboard?
 
-router.get('/.*', async (req, res) => { // checks for any value
+router.get('/signup', async (req, res) => { // checks for any value
+
+    if (req.session.loggedIn) { // check if loggedin & send back to main
+        res.redirect('/');
+        return;
+      }
+    res.render('signup');
+});
+
+router.get('/login', async (req, res) => { // checks for any value
 
     if (req.session.loggedIn) { // check if loggedin
         res.redirect('/');
         return;
       }
-    res.render('signup');
+    res.render('login');
 });
 
 module.exports = router;

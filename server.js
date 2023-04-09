@@ -35,16 +35,16 @@ const bars = handlebars.create();
 app.engine('handlebars', bars.engine);
 app.set('view engine', 'handlebars');
 
+// express middleware for parsing JSON and urlencoded form data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // connect and use controllers /api routes
 const routes = require('./controllers');
 app.use(routes);
 
 // connect static resources
 app.use(express.static('public'));
-
-// express middleware for parsing JSON and urlencoded form data
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // set .env PORT, or localhost:3001
 const port = process.env.PORT || 3001;
