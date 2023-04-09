@@ -38,6 +38,7 @@ app.set('view engine', 'handlebars');
 // express middleware for parsing JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// ran into an error because I was calling API routes before this middleware
 
 // connect and use controllers /api routes
 const routes = require('./controllers');
