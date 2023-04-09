@@ -46,22 +46,22 @@ if (req.session.loggedIn) { // check if loggedin
 }
 });
 
-router.get('/signup', async (req, res) => { // checks for any value
-
-    if (req.session.loggedIn) { // check if loggedin & send back to main
-        res.redirect('/');
-        return;
-      }
+router.get('/signup', async (req, res) => { // no logic here - signup link will only show if not logged-in
     res.render('signup');
 });
 
-router.get('/login', async (req, res) => { // checks for any value
-
-    if (req.session.loggedIn) { // check if loggedin
-        res.redirect('/');
-        return;
-      }
+router.get('/login', async (req, res) => { // no logic here - login link will only show up if not logged-in
     res.render('login');
+});
+
+router.get('/new', async (req, res) => { 
+
+    if (req.session.loggedIn) {
+        res.render('new');
+        return;
+    } else {
+        res.redirect('/login'); // redirect to login if not 
+    }
 });
 
 module.exports = router;
