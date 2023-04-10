@@ -1,4 +1,4 @@
-<section class="hero is-success mt-6">
+<section class="hero is-success mt-4 mb-4">
   <div class="hero-body">
     <p class="title">
       Home
@@ -14,14 +14,9 @@
   <div class="card block">
   <div class="card-content">
     <div class="media">
-      <div class="media-left">
-        <figure class="image is-48x48">
-          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-        </figure>
-      </div>
       <div class="media-content">
-        <p class="title is-4">{{ title }}</p>
-        <p class="subtitle">@{{user.username}} on <time datetime="{{createdAt}}">{{ createdAt }}</time></p>
+        <p class="title is-4"><a href="/post/{{id}}">{{ title }}</a></p>
+        <p class="subtitle">By {{ user.username }} on <time datetime="{{createdAt}}">{{ formatDate createdAt }}</time></p>
         <p>{{ content }}</p>
       </div>
     </div>

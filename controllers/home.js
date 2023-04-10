@@ -22,13 +22,39 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/post/:id', async (req, res) => {
+    try {
+        const post = await Post.findOne({
+            where: { id: req.params.id },
+            include: { model: User, attributes: ['username'] }
+        })
+        .then(data => {
+            return data.get({ plain: true });
+        });
+        console.log(post);
+        if (!post) { 
+            console.log('No post with this id!');
+            return;
+        } else {
+            res.render('single', 
+            { post, 
+              loggedIn: req.session.loggedIn, // passes this info to handlebars render so it can be used as a conditional
+              user_id: req.session.userid
+            }); 
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+})
+
 // get posts by user id for dashboard
 router.get('/dashboard', async (req, res) => {
 if (req.session.loggedIn) { // check if loggedin
     try {
         const postData = await Post.findAll({
             where: { user_id: req.session.userid },
-            order: [[ 'createdAt', 'DESC' ]]
+            order: [[ 'createdAt', 'DESC' ]],
+            include: { model: User, attributes: ['username'] }
         });
 
         const posts = postData.map((post => post.get ({ plain: true })));

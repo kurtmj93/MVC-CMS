@@ -30,8 +30,9 @@ const sess = {
   };
   app.use(session(sess));
 
-// set handlebars as view engine
-const bars = handlebars.create();
+// set handlebars as view engine and add helpers
+const helpers = require('./utils/helpers');
+const bars = handlebars.create({helpers});
 app.engine('handlebars', bars.engine);
 app.set('view engine', 'handlebars');
 
