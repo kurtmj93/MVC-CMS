@@ -57,7 +57,10 @@ router.get('/login', async (req, res) => { // no logic here - login link will on
 router.get('/new', async (req, res) => { 
 
     if (req.session.loggedIn) {
-        res.render('new');
+        res.render('new',
+        {   loggedIn: req.session.loggedIn, // passes this info to handlebars render so it can be used as a conditional
+            user_id: req.session.userid
+        });
         return;
     } else {
         res.redirect('/login'); // redirect to login if not 
