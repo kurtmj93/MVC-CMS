@@ -68,6 +68,7 @@ router.post('/:id/comments/', async (req, res) => {
       const newComment = await Comment.create({
         text: req.body.text,
         user_id: req.session.user_id,
+        post_id: req.params.id
       });
   
       res.status(200).json(newComment);
@@ -75,6 +76,26 @@ router.post('/:id/comments/', async (req, res) => {
       res.status(400).json(err);
     }
   });
+
+// get comments by post_id
+
+router.get('/:id/comments', async (req, res) =>{
+  try {
+    const comments = await Comment.findAll({
+      where: {
+        post_id: req.params.id,
+      },
+    });
+    
+    if (!comments) { // return specific error if there is no product found with this id
+      res.status(404).json({ message: 'No comments here!' });
+      return;
+    }
+    res.status(200).json(comments);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
   
 // delete a comment by comment id
 router.post('/:id/comments/:commentId', async (req, res) => {
