@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User } = require('../models');
+const { Post, User, Comment } = require('../models');
 
 // get all posts for homepage
 router.get('/', async (req, res) => {
@@ -22,16 +22,27 @@ router.get('/', async (req, res) => {
     }
 });
 
+// get post and comments by post id to render single page
 router.get('/post/:id', async (req, res) => {
     try {
         const post = await Post.findOne({
             where: { id: req.params.id },
-            include: { model: User, attributes: ['username'] }
+            include: [
+                {
+                  model: Comment,
+                  include: [{
+                    model: User, attributes: ['username'] // username of comment author
+                  }]
+                },
+                {
+                  model: User, attributes: ['username'] // username of post author
+                }]
         })
         .then(data => {
             return data.get({ plain: true });
         });
         console.log(post);
+
         if (!post) { 
             console.log('No post with this id!');
             return;

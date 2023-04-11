@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User } = require('../../models');
+const { Post, User, Comment } = require('../../models');
 
 // get all posts
 router.get('/', async (req, res) => {
@@ -15,7 +15,18 @@ router.get('/', async (req, res) => {
 // get one post by post id
 router.get('/:id', async (req, res) => {
     try {
-      const post = await Post.findByPk(req.params.id, {include: { model: User, attributes: ['username'] } });
+      const post = await Post.findByPk(req.params.id, {
+        include: [
+      {
+        model: Comment,
+        include: [{
+          model: User, attributes: ['username'] // username of comment author
+        }]
+      },
+      {
+        model: User, attributes: ['username'] // username of post author
+      }]
+      });
       
       if (!post) { // return specific error if there is no product found with this id
         res.status(404).json({ message: 'No post found with this id!' });
@@ -67,7 +78,7 @@ router.post('/:id/comments/', async (req, res) => {
     try {
       const newComment = await Comment.create({
         text: req.body.text,
-        user_id: req.session.user_id,
+        user_id: req.session.userid || req.body.user_id, // pipe here allows me to pass it from the back-end via JSON or from req.session
         post_id: req.params.id
       });
   
@@ -78,7 +89,6 @@ router.post('/:id/comments/', async (req, res) => {
   });
 
 // get comments by post_id
-
 router.get('/:id/comments', async (req, res) =>{
   try {
     const comments = await Comment.findAll({

@@ -18,3 +18,20 @@
     </div>
   </div>
   </div>
+
+<div class="subtitle">Comments</div>
+
+
+{{#each post.comments}}
+
+<div class="card block">
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <p>{{ text }}</p>
+        <p>- {{user.username}} on {{formatDate createdAt}}</p>
+      </div>
+    </div>
+  </div>
+  </div>
+{{/each}}
