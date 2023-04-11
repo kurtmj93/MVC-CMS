@@ -8,7 +8,7 @@
 
   ### Deployed Link & Screenshot
 
-  ![Deployed Link](https://infinite-scrubland-01157.herokuapp.com/)
+  [Deployed Link](https://infinite-scrubland-01157.herokuapp.com/)
 
   ![Deployed Screenshot](./assets/deployed.png "Deployed Screenshot")
 
