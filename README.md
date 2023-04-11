@@ -1,11 +1,42 @@
 # MVC-CMS
-A simple Content Management System (CMS) built using the Model-View-Controller (MVC) paradigm and handlebars view engine.
 
-# ACCEPTANCE CRITERIA - TODOs
+  ![License Badge](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 
-- [x] WHEN I click on an existing blog post THEN I am presented with the post title, contents, post creator’s username, and date created for that post 
-- [x] and have the option to leave a comment
-- [x] WHEN I enter a comment and click on the submit button while signed in THEN the comment is saved 
-- [x] and the post is updated to display the comment, the comment creator’s username, and the date created
-- [x] WHEN I click on one of my existing posts in the dashboard THEN I am able to delete or update my post and taken back to an updated dashboard
-- [ ] DEPLOY TO HEROKU
+  ## Description
+
+  A simple Content Management System (CMS) built using the Model-View-Controller (MVC) paradigm, handlebars view engine and Bulma css framework.
+
+  ### Deployed Link & Screenshot
+
+  ![Deployed Link](https://infinite-scrubland-01157.herokuapp.com/)
+
+  ![Deployed Screenshot](./assets/deployed.png "Deployed Screenshot")
+
+  ## Table of Contents
+
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Credits](#credits)
+  - [License](#license)
+  - [Questions](#questions)
+
+  ## Installation
+
+  Use `npm i` and `npm run seed` to initialize the app.
+
+  ## Usage
+
+  Use `npm run start` to run the server.
+
+  ## Credits
+
+  University of Richmond Coding Bootcamp
+
+  ## License
+    
+    This project is licensed under the MIT license.
+
+  ## Questions
+
+  - [GitHub User: Kurtmj93](https://github.com/Kurtmj93/)
+  - Email: Kurtmj93@gmail.com
