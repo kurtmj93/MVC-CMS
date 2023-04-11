@@ -1,0 +1,72 @@
+<section class="hero is-warning mt-4 mb-4">
+  <div class="hero-body">
+    <p class="title">
+    YOU ARE EDITING
+    </p>
+    <p class="subtitle">
+      {{ post.title }}
+      </p>
+  </div>
+</section>
+
+<form id="editPost" class="box mb-6">
+    <div class="field">
+      <label class="label" for="titleInput">Post Title</label>
+      <div class="control">
+      <input class="input" type="text" id="titleInput" value="{{post.title}}"/>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label" for="postContent">Post Content</label>
+      <textarea name="postContent" class="textarea">{{post.content}}</textarea>
+      </div>
+
+  <div class="control">
+    <button type="submit" class="button is-success">Submit Update</button>
+  </div>
+  </form>
+
+  <a class="button is-link" href="/post/{{post.id}}"> See Live Post</a>
+
+<form id="deletePost">
+  <div class="control">
+    <input type="hidden" name="post_id" value="{{post.id}}">
+    <button type="submit" class="button is-danger">Delete Post</button>
+  </div>
+</form>
+
+<script src="/js/edit.js"></script>
+<script src="/js/delete.js"></script>
+
+
+<div class="is-divider"></div>
+
+<div class="subtitle">Comments</div>
+
+
+{{#each post.comments}}
+
+<div class="card block">
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <p>{{ text }}</p>
+        <p>- {{user.username}} on {{formatDate createdAt}}</p>
+      </div>
+    </div>
+  </div>
+  </div>
+{{/each}}
+
+<div class="subtitle">Leave a Comment</div>
+
+<form id="newComment" class="box mb-6">
+    <div class="field">
+      <label class="label" for="commentText">Your Comment</label>
+      <textarea name="commentText" class="textarea"></textarea>
+      </div>
+  <div class="control">
+    <button type="submit" class="button is-danger">Submit Comment</button>
+  </div>
+  </form>
+<script src="/js/comment.js"></script>

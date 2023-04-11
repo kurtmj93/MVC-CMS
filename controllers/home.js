@@ -50,13 +50,54 @@ router.get('/post/:id', async (req, res) => {
             res.render('single', 
             { post, 
               loggedIn: req.session.loggedIn, // passes this info to handlebars render so it can be used as a conditional
-              user_id: req.session.userid
+              sessUserId: req.session.userid
             }); 
         }
     } catch (err) {
         res.status(500).json(err);
     }
 })
+
+// get post and comments by post id to render edit page
+router.get('/edit/:id', async (req, res) => {
+if (req.session.loggedIn) { // check if loggedin
+    try {
+        const post = await Post.findOne({
+            where: { id: req.params.id },
+            include: [
+                {
+                  model: Comment,
+                  include: [{
+                    model: User, attributes: ['username'] // username of comment author
+                  }]
+                },
+                {
+                  model: User, attributes: ['username'] // username of post author
+                }]
+        })
+        .then(data => {
+            return data.get({ plain: true });
+        });
+        console.log(post);
+
+        if (!post) { 
+            console.log('No post with this id!');
+            return;
+        } else {
+            res.render('edit', 
+            { post, 
+              loggedIn: req.session.loggedIn, // passes this info to handlebars render so it can be used as a conditional
+              sessUserId: req.session.userid
+            }); 
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+} else {
+    res.redirect('/login');
+    return;
+}
+});
 
 // get posts by user id for dashboard
 router.get('/dashboard', async (req, res) => {
