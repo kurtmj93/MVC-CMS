@@ -35,3 +35,20 @@
   </div>
   </div>
 {{/each}}
+
+<div class="subtitle">Leave a Comment</div>
+
+{{#if loggedIn}}
+<form id="newComment" class="box mb-6">
+    <div class="field">
+      <label class="label" for="commentText">Your Comment</label>
+      <textarea name="commentText" class="textarea"></textarea>
+      </div>
+  <div class="control">
+    <button type="submit" class="button is-danger">Submit Comment</button>
+  </div>
+  </form>
+<script src="/js/comment.js"></script>
+{{else}}
+<p>You must be <a href="/login">logged-in</a> to comment!</p>
+{{/if}}
